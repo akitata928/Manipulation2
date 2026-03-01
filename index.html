@@ -10,13 +10,12 @@
             --active-color: #e74c3c;
             --bg-color: #ffffff;
             --text-color: #333333;
-            --border-color: #dddddd;
-            --toc-bg: #f8f9fa;
+            --border-color: #e2e8f0;
+            --sidebar-bg: #f8fafc;
         }
         
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 30px;
         }
 
         body {
@@ -24,270 +23,293 @@
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--bg-color);
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 30px 20px;
+            margin: 0;
+            display: flex; /* 啟用 Flexbox 進行左右排版 */
         }
-        h1 {
-            font-size: 2.2em;
+
+        /* === 左側邊欄目錄設計 === */
+        .sidebar {
+            width: 280px;
+            height: 100vh;
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            padding: 30px 20px;
+            box-sizing: border-box;
+        }
+
+        .sidebar h2 {
+            font-size: 1.2em;
             color: var(--primary-color);
             border-bottom: 2px solid var(--border-color);
             padding-bottom: 10px;
+            margin-top: 0;
             margin-bottom: 20px;
         }
-        h2 {
-            font-size: 1.8em;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 5px;
-            margin-top: 40px;
+
+        .sidebar ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
         }
+
+        .sidebar li {
+            margin-bottom: 12px;
+        }
+
+        .sidebar ul ul {
+            padding-left: 15px;
+            border-left: 2px solid var(--border-color);
+            margin-left: 5px;
+            margin-top: 8px;
+        }
+
+        .sidebar a {
+            color: #475569;
+            text-decoration: none;
+            font-size: 0.95em;
+            display: block;
+            transition: color 0.2s;
+        }
+
+        .sidebar a:hover {
+            color: var(--active-color);
+        }
+
+        /* === 右側主要內容區 === */
+        .main-content {
+            margin-left: 280px; /* 留出側邊欄的寬度 */
+            padding: 40px 60px;
+            max-width: 900px;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 2.4em;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+
+        h2.section-title {
+            font-size: 1.8em;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+
         h3 {
             font-size: 1.4em;
             color: #2980b9;
-            margin-top: 25px;
-        }
-        p {
+            margin-top: 35px;
             margin-bottom: 15px;
         }
-        a {
-            color: #2980b9;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        
-        /* 目錄區塊設計 (Table of Contents) */
-        .toc {
-            background-color: var(--toc-bg);
-            border: 1px solid #a2a9b1;
-            padding: 15px 25px;
-            display: inline-block;
-            margin: 20px 0;
-            border-radius: 4px;
-            position: sticky;
-            top: 20px;
-            z-index: 100;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .toc h2 {
-            margin-top: 0;
-            border-bottom: none;
-            font-size: 1.2em;
-            text-align: center;
-            color: var(--text-color);
-        }
-        .toc ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        .toc li {
-            margin-bottom: 8px;
-        }
-        .toc ul ul {
-            padding-left: 20px;
-            list-style-type: none;
-            border-left: 2px solid #e0e0e0;
-            margin-left: 5px;
-            margin-top: 5px;
-        }
-        
-        .toc a.active {
-            font-weight: bold;
-            color: var(--active-color);
-            padding-left: 5px;
-            border-left: 3px solid var(--active-color);
+
+        p {
+            margin-bottom: 18px;
+            font-size: 1.05em;
         }
 
         /* 表格設計 */
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin: 25px 0;
+            background-color: #fff;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
         }
         th, td {
-            border: 1px solid #a2a9b1;
-            padding: 12px;
+            border: 1px solid var(--border-color);
+            padding: 14px;
             text-align: left;
         }
         th {
-            background-color: #eaecf0;
+            background-color: #f1f5f9;
             font-weight: bold;
+            color: var(--primary-color);
         }
         tr:nth-child(even) {
-            background-color: #f8f9fa;
+            background-color: #f8fafc;
         }
-        
-        /* 強調與引言 */
+
         blockquote {
-            background: #f9f9f9;
-            border-left: 5px solid #ccc;
-            margin: 1.5em 10px;
-            padding: 1em 15px;
+            background: #f1f5f9;
+            border-left: 5px solid #94a3b8;
+            margin: 2em 0;
+            padding: 1.5em 20px;
             font-style: italic;
-            color: #555;
+            color: #475569;
+            border-radius: 0 4px 4px 0;
         }
+
         .highlight {
-            background-color: #fff3cd;
-            padding: 2px 4px;
-            border-radius: 3px;
+            background-color: #fef08a;
+            padding: 2px 6px;
+            border-radius: 4px;
             font-weight: bold;
+            color: #854d0e;
         }
+
         .math-concept {
             font-family: monospace;
-            background-color: #f0f0f0;
-            padding: 2px 5px;
-            border-radius: 3px;
-            color: #c0392b;
+            background-color: #e2e8f0;
+            padding: 3px 6px;
+            border-radius: 4px;
+            color: #b91c1c;
+            font-size: 0.9em;
+        }
+
+        /* 響應式設計 (手機版適配) */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 20px;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 25px 20px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>現代認知戰藍圖：政治操弄與社會工程的五層架構</h1>
-    
-    <p><strong>認知戰（Cognitive Warfare）</strong>是將社會心理學、演算法與大眾傳播結合的武器化應用。在這個戰場裡，人類的大腦就是終端設備，而認知戰的目的，就是駭入這個設備的作業系統。</p>
-    
-    <p>傳統政治角力是「論述戰」，雙方提出政見爭取認同；現代認知戰則是<strong>「泥巴戰與認同戰」</strong>。其目標是讓特定政治立場顯得「道德正確且安全」，而將對手塑造成「不可接觸的邪惡（Toxic）」，從而剝奪選民的理性選擇空間。</p>
-
-    <div class="toc">
-        <h2>目錄</h2>
+    <div class="sidebar">
+        <h2>📑 目錄導覽</h2>
         <ul>
             <li><a href="#section-1">1. 認知戰運作總覽表</a></li>
             <li><a href="#section-2">2. 五層級運作機制詳解</a>
                 <ul>
-                    <li><a href="#level-1">2.1 第一層：藍圖設計（掌握資訊制空權）</a></li>
-                    <li><a href="#level-2">2.2 第二層：誘捕機制（情緒動員與劫持）</a></li>
-                    <li><a href="#level-3">2.3 第三層：認知故障（真相解構與資訊熵）</a></li>
-                    <li><a href="#level-4">2.4 第四層：側翼執行（部落主義武器化）</a></li>
-                    <li><a href="#level-5">2.5 第五層：心理囚禁（工程化服從）</a></li>
+                    <li><a href="#level-1">2.1 第一層：藍圖設計</a></li>
+                    <li><a href="#level-2">2.2 第二層：誘捕機制</a></li>
+                    <li><a href="#level-3">2.3 第三層：認知故障</a></li>
+                    <li><a href="#level-4">2.4 第四層：側翼執行</a></li>
+                    <li><a href="#level-5">2.5 第五層：心理囚禁</a></li>
                 </ul>
             </li>
             <li><a href="#section-3">3. 總結與破局之道</a></li>
         </ul>
     </div>
 
-    <h2 id="section-1" class="scroll-section">1. 認知戰運作總覽表</h2>
-    <p>這套系統並非隨機發生，而是一場對人類心智的有組織攻擊。以下為五個階段的邏輯模型與在地化現象對照：</p>
-    <table>
-        <thead>
-            <tr>
-                <th>階段</th>
-                <th>戰術目標</th>
-                <th>數學 / 邏輯模型對照</th>
-                <th>台灣在地常見現象 / 工具箱</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>1. 藍圖</strong></td>
-                <td>掌握資訊制空權</td>
-                <td><span class="math-concept">縮小樣本空間 (Domain)</span></td>
-                <td>內容農場洗版、演算法推播特定圖卡、帶風向</td>
-            </tr>
-            <tr>
-                <td><strong>2. 誘捕</strong></td>
-                <td>情緒動員與劫持</td>
-                <td><span class="math-concept">扭曲效用函數 (Utility)</span></td>
-                <td>販賣芒果乾（亡國感）、挑起世代與階級對立</td>
-            </tr>
-            <tr>
-                <td><strong>3. 故障</strong></td>
-                <td>真相解構與癱瘓理性</td>
-                <td><span class="math-concept">極大化資訊熵 (Entropy)</span></td>
-                <td>側翼拋出大量陰謀論、烏賊泥巴戰、機關槍辯論</td>
-            </tr>
-            <tr>
-                <td><strong>4. 執行</strong></td>
-                <td>將受眾武器化</td>
-                <td><span class="math-concept">切割二分圖 (Bipartite Graph)</span></td>
-                <td>網軍與側翼出征、扣帽子貼標籤（非人化）</td>
-            </tr>
-            <tr>
-                <td><strong>5. 囚禁</strong></td>
-                <td>完成社會控制</td>
-                <td><span class="math-concept">馬可夫鏈吸收態 (Absorbing State)</span></td>
-                <td>害怕被出征而退群、同溫層忠誠審查、寒蟬效應</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="main-content">
+        <h1>🛡️ 現代認知戰藍圖：政治操弄與社會工程的五層架構</h1>
+        
+        <p><strong>認知戰（Cognitive Warfare）</strong>是將社會心理學、演算法與大眾傳播結合的武器化應用。在這個戰場裡，人類的大腦就是終端設備，而認知戰的目的，就是駭入這個設備的作業系統。</p>
+        
+        <p>傳統政治角力是「論述戰」，雙方提出政見爭取認同；現代認知戰則是<strong>「泥巴戰與認同戰」</strong>。其目標是讓特定政治立場顯得「道德正確且安全」，而將對手塑造成「不可接觸的邪惡（Toxic）」，從而剝奪選民的理性選擇空間。</p>
 
-    <h2 id="section-2" class="scroll-section">2. 五層級運作機制詳解</h2>
+        <h2 id="section-1" class="section-title">1. 認知戰運作總覽表</h2>
+        <p>這套系統並非隨機發生，而是一場對人類心智的有組織攻擊。以下為五個階段的邏輯模型與在地化現象對照：</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>階段</th>
+                    <th>戰術目標</th>
+                    <th>數學 / 邏輯模型對照</th>
+                    <th>台灣在地常見現象 / 工具箱</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1. 藍圖</strong></td>
+                    <td>掌握資訊制空權</td>
+                    <td><span class="math-concept">縮小樣本空間 (Domain)</span></td>
+                    <td>內容農場洗版、演算法推播特定圖卡、帶風向</td>
+                </tr>
+                <tr>
+                    <td><strong>2. 誘捕</strong></td>
+                    <td>情緒動員與劫持</td>
+                    <td><span class="math-concept">扭曲效用函數 (Utility)</span></td>
+                    <td>販賣芒果乾（亡國感）、吹捧東升西降（大國崛起）、挑起階級對立</td>
+                </tr>
+                <tr>
+                    <td><strong>3. 故障</strong></td>
+                    <td>真相解構與癱瘓理性</td>
+                    <td><span class="math-concept">極大化資訊熵 (Entropy)</span></td>
+                    <td>側翼拋出大量陰謀論、烏賊泥巴戰、機關槍辯論</td>
+                </tr>
+                <tr>
+                    <td><strong>4. 執行</strong></td>
+                    <td>將受眾武器化</td>
+                    <td><span class="math-concept">切割二分圖 (Bipartite)</span></td>
+                    <td>網軍與側翼出征、扣帽子貼標籤（非人化）</td>
+                </tr>
+                <tr>
+                    <td><strong>5. 囚禁</strong></td>
+                    <td>完成社會控制</td>
+                    <td><span class="math-concept">馬可夫鏈吸收態 (Loop)</span></td>
+                    <td>害怕被出征而退群、同溫層忠誠審查、寒蟬效應</td>
+                </tr>
+            </tbody>
+        </table>
 
-    <h3 id="level-1" class="scroll-section">2.1 第一層：藍圖設計（掌握資訊制空權）</h3>
-    <p><strong>【戰略】：建構平行現實，設定奧弗頓之窗（Overton Window）。</strong><br>
-    在選民開始思考之前，操盤手（設計師）已經決定了大家這週要吵什麼。這不是改變你的答案，而是限制你的考卷題目。在集合論中，這等於強行縮小你的定義域，把你關在一個被精心篩選的資訊子集裡。</p>
-    <ul>
-        <li><strong>議程設定（帶風向）</strong>：透過公關公司或特定媒體，瞬間將某個邊緣議題炒作成全國焦點。</li>
-        <li><strong>演算法投餵（Algorithm Feeding）</strong>：利用社群平台的推薦機制，為不同族群打造專屬的「平行宇宙」。</li>
-    </ul>
+        <h2 id="section-2" class="section-title">2. 五層級運作機制詳解</h2>
 
-    <h3 id="level-2" class="scroll-section">2.2 第二層：誘捕機制（情緒動員與劫持）</h3>
-    <p><strong>【戰略】：癱瘓理性，喚醒原始的生存焦慮與群體歸屬。</strong><br>
-    政治認知戰極度依賴情緒，因為「恐懼」與「仇恨」的傳播速度遠大於「理性」。操盤手透過改變你的效用函數，讓你覺得「被群體拋棄的代價」遠大於「追求客觀真相的價值」。</p>
-    <ul>
-        <li><strong>生存恐懼訴求（販賣芒果乾）</strong>：將一場選舉無限上綱為「國家存亡」的最後一戰，迫使選民因恐懼而放棄檢視具體政見。</li>
-        <li><strong>相對剝奪感</strong>：挑起年輕人對高房價的憤怒、勞工對資本家的仇視，將複雜的結構問題簡化為「他們搶走了你的未來」。</li>
-    </ul>
+        <h3 id="level-1">2.1 第一層：藍圖設計（掌握資訊制空權）</h3>
+        <p><strong>【戰略】：建構平行現實，設定奧弗頓之窗（Overton Window）。</strong><br>
+        在選民開始思考之前，操盤手（設計師）已經決定了大家這週要吵什麼。這不是改變你的答案，而是限制你的考卷題目。在集合論中，這等於強行縮小你的定義域，把你關在一個被精心篩選的資訊子集裡。</p>
+        <ul>
+            <li><strong>議程設定（帶風向）</strong>：透過公關公司或特定媒體，瞬間將某個邊緣議題炒作成全國焦點。</li>
+            <li><strong>演算法投餵（Algorithm Feeding）</strong>：利用社群平台的推薦機制，為不同族群打造專屬的「平行宇宙」。</li>
+        </ul>
 
-    <h3 id="level-3" class="scroll-section">2.3 第三層：認知故障（真相解構與資訊熵極大化）</h3>
-    <p><strong>【戰略】：不是讓你相信假新聞，而是讓你不再相信任何新聞。</strong><br>
-    當選民試圖查證事實時，防禦機制就會啟動。操盤手會對系統注入巨量雜訊（極大化資訊熵），當訊噪比崩潰、大腦為求節能，就會直接放棄運算，產生政治冷漠。</p>
-    <ul>
-        <li><strong>謊言噴泉（Firehose of Falsehood）</strong>：短時間內釋放大量半真半假的抹黑圖卡。即便事後澄清，傷害已經造成。</li>
-        <li><strong>烏賊戰術（Whataboutism）</strong>：當己方發生醜聞時，立刻拋出對手的舊案來模糊焦點，導致選民產生「天下烏鴉一般黑」的無力感。</li>
-    </ul>
+        <h3 id="level-2">2.2 第二層：誘捕機制（情緒動員與劫持）</h3>
+        <p><strong>【戰略】：癱瘓理性，喚醒原始的生存焦慮與群體歸屬。</strong><br>
+        政治認知戰極度依賴情緒，因為「恐懼」與「崇拜」的傳播速度遠大於「理性」。操盤手透過改變你的效用函數，讓你在極端的情緒中放棄客觀思考。</p>
+        <ul>
+            <li><strong>生存恐懼訴求（販賣芒果乾/亡國感）</strong>：將一場常規選舉無限上綱為「國家存亡」的最後一戰，迫使選民因極度焦慮而放棄檢視政見，只求「保台」的心理安全感。</li>
+            <li><strong>慕強心理與歷史必然論（吹捧中國偉大復興與東升西降）</strong>：利用宏大的敘事，塑造「西方/美國衰敗已成定局，大國崛起無可阻擋」的假象。這是一種「必勝信念」的植入，利用人們不想「站錯邊」或「成為歷史輸家」的群體壓力，誘使大眾放棄抵抗並自我合理化。</li>
+            <li><strong>相對剝奪感</strong>：挑起年輕人對高房價的憤怒、勞工對資本家的仇視，將複雜的結構問題簡化為「他們搶走了你的未來」。</li>
+        </ul>
 
-    <h3 id="level-4" class="scroll-section">2.4 第四層：側翼執行（部落主義武器化）</h3>
-    <p><strong>【戰略】：將受眾轉化為免費的攻擊節點，用群眾鬥群眾。</strong><br>
-    系統不再親自動手，而是讓被洗腦的選民成為「神學士」，去消滅任何不同的聲音。社會網路被強制切割成水火不容的二分圖（非我即敵）。</p>
-    <ul>
-        <li><strong>網軍與側翼出征</strong>：針對提出質疑的意見領袖、學者或普通網友進行集體的網路霸凌與洗地。</li>
-        <li><strong>貼標籤與非人化</strong>：發明各種具貶義的政治簡稱，一旦被貼上標籤，對方就不再是同胞，而是必須被消滅的「戰犯」。</li>
-    </ul>
+        <h3 id="level-3">2.3 第三層：認知故障（真相解構與資訊熵極大化）</h3>
+        <p><strong>【戰略】：不是讓你相信假新聞，而是讓你不再相信任何新聞。</strong><br>
+        當選民試圖查證事實時，防禦機制就會啟動。操盤手會對系統注入巨量雜訊（極大化資訊熵），當訊噪比崩潰、大腦為求節能，就會直接放棄運算，產生政治冷漠。</p>
+        <ul>
+            <li><strong>謊言噴泉（Firehose of Falsehood）</strong>：短時間內釋放大量半真半假的抹黑圖卡。即便事後澄清，傷害已經造成。</li>
+            <li><strong>烏賊戰術（Whataboutism）</strong>：當己方發生醜聞時，立刻拋出對手的舊案來模糊焦點，導致選民產生「天下烏鴉一般黑」的無力感。</li>
+        </ul>
 
-    <h3 id="level-5" class="scroll-section">2.5 第五層：心理囚禁（工程化服從與寒蟬效應）</h3>
-    <p><strong>【戰略】：完成社會控制，讓異見者自動閉嘴。</strong><br>
-    當攻擊足夠猛烈，牢籠就建構完成了。這是一個「有進無出」的死循環，一旦社會進入這個狀態，就很難自發性地逃脫。</p>
-    <ul>
-        <li><strong>沉默的螺旋（Spiral of Silence）</strong>：普通人為了避免掉粉、被肉搜或被親友群組圍剿，選擇在公共議題上徹底噤聲。</li>
-        <li><strong>同溫層的忠誠審查</strong>：在陣營內部進行思想審查，稍有溫和或跨越藍綠白的言論，就會被視為「背叛」而遭到無情肅清。</li>
-    </ul>
+        <h3 id="level-4">2.4 第四層：側翼執行（部落主義武器化）</h3>
+        <p><strong>【戰略】：將受眾轉化為免費的攻擊節點，用群眾鬥群眾。</strong><br>
+        系統不再親自動手，而是讓被洗腦的選民成為「神學士」，去消滅任何不同的聲音。社會網路被強制切割成水火不容的二分圖（非我即敵）。</p>
+        <ul>
+            <li><strong>網軍與側翼出征</strong>：針對提出質疑的意見領袖、學者或普通網友進行集體的網路霸凌與洗地。</li>
+            <li><strong>貼標籤與非人化</strong>：發明各種具貶義的政治簡稱，一旦被貼上標籤，對方就不再是同胞，而是必須被消滅的「戰犯」。</li>
+        </ul>
 
-    <h2 id="section-3" class="scroll-section">3. 總結與破局之道</h2>
-    <p>認知戰的可怕之處在於，它完美利用了人類渴望歸屬感與害怕被孤立的演化本能。</p>
-    
-    <blockquote>
-        「系統不需要你變得聰明，只需要你變得忠誠。在情緒當道的時代，單靠『事實查核』是無力的防線。」
-    </blockquote>
+        <h3 id="level-5">2.5 第五層：心理囚禁（工程化服從與寒蟬效應）</h3>
+        <p><strong>【戰略】：完成社會控制，讓異見者自動閉嘴。</strong><br>
+        當攻擊足夠猛烈，牢籠就建構完成了。這是一個「有進無出」的死循環，一旦社會進入這個狀態，就很難自發性地逃脫。</p>
+        <ul>
+            <li><strong>沉默的螺旋（Spiral of Silence）</strong>：普通人為了避免掉粉、被肉搜或被親友群組圍剿，選擇在公共議題上徹底噤聲。</li>
+            <li><strong>同溫層的忠誠審查</strong>：在陣營內部進行思想審查，稍有溫和或跨黨派的言論，就會被視為「背叛」而遭到無情肅清。</li>
+        </ul>
 
-    <p>要打破這個藍圖，真正的抵抗是建立對這套機制的<span class="highlight">「後設認知（Meta-cognition）」</span>。當你意識到自己正因為某張政治圖卡感到極度憤怒，或者因為害怕被側翼攻擊而默默刪除留言時，你就能看見那條牽引著你的隱形木偶線。奪回大腦作業系統控制權的第一步，就是<strong>擁有承受「不合群」與「社交不適感」的勇氣</strong>。</p>
+        <h2 id="section-3" class="section-title">3. 總結與破局之道</h2>
+        <p>認知戰的可怕之處在於，它完美利用了人類渴望歸屬感與害怕被孤立的演化本能。</p>
+        
+        <blockquote>
+            「系統不需要你變得聰明，只需要你變得忠誠。在情緒當道的時代，單靠『事實查核』是無力的防線。」
+        </blockquote>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const sections = document.querySelectorAll(".scroll-section");
-            const navLinks = document.querySelectorAll(".toc a");
+        <p>要打破這個藍圖，真正的抵抗是建立對這套機制的<span class="highlight">「後設認知（Meta-cognition）」</span>。當你意識到自己正因為某張政治圖卡感到極度恐懼，或是因為宏大敘事而感到熱血沸騰，甚至因為害怕被攻擊而默默刪除留言時，你就能看見那條牽引著你的隱形木偶線。奪回大腦作業系統控制權的第一步，就是<strong>擁有承受「不合群」與「社交不適感」的勇氣</strong>。</p>
+    </div>
 
-            window.addEventListener("scroll", () => {
-                let current = "";
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (pageYOffset >= sectionTop - 60) {
-                        current = section.getAttribute("id");
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove("active");
-                    if (link.getAttribute("href").includes(current)) {
-                        link.classList.add("active");
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
-
